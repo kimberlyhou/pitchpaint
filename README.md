@@ -1,2 +1,2 @@
-# pitchpaint
+# PitchPaint
 PitchPaint
