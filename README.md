@@ -12,6 +12,8 @@ In a directory unrelated to our repo test the following:
 #test your environment works
 react-native init TestProject 
 cd TestProject 
+#before you run make sure XCode is open, 
+#otherwise your project will not compile in the simulator
 react-native run-ios
 ```
 
