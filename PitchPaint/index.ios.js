@@ -15,8 +15,8 @@ import {
 } from 'react-native';
 const Sound = require('react-native-sound');
 
-const c3_sound = require('sounds/C3.wav');
 
+const Header = ({children}) => (<Text style={styles.header}>{children}</Text>);
 
 const Button = ({title, onPress}) => (
   <TouchableOpacity onPress={onPress}>
@@ -36,11 +36,12 @@ const Feature = ({title, onPress, description, buttonLabel = "PLAY"}) => (
 
 export default class PitchPaint extends Component {
 
-  this.state = {
-      loopingSound: undefined,
-    };
+  constructor(props) {
+    super(props);
 
-  this.playSoundLooped = () => {
+    this.state = {loopingSound: undefined};
+
+    this.playSoundLooped = () => {
       if (this.state.loopingSound) {
         return;
       }
@@ -64,6 +65,7 @@ export default class PitchPaint extends Component {
         .release();
       this.setState({loopingSound: null});
     };
+  }
 
 
   render() {
