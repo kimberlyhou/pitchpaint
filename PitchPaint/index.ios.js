@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 const Sound = require('react-native-sound');
 
-// const c3_sound = require('sounds/C3.wav');
+// const c3_sound = require('sounds/C3.mp3');
 
 const Header = ({children}) => (<Text style={styles.header}>{children}</Text>);
 
@@ -49,14 +49,14 @@ export default class PitchPaint extends Component {
 
   constructor(props) {
     super(props);
-    this.c3 = createSound('sounds/C3.wav');
-    this.d3 = createSound('sounds/D3.wav');
-    this.e3 = createSound('sounds/E3.wav');
-    this.f3 = createSound('sounds/F3.wav');
-    this.g3 = createSound('sounds/G3.wav');
-    this.a4 = createSound('sounds/A4.wav');
-    this.b4 = createSound('sounds/B4.wav');
-    this.c4 = createSound('sounds/C4.wav');
+    this.c3 = createSound('sounds/C3.mp3');
+    this.d3 = createSound('sounds/D3.mp3');
+    this.e3 = createSound('sounds/E3.mp3');
+    this.f3 = createSound('sounds/F3.mp3');
+    this.g3 = createSound('sounds/G3.mp3');
+    this.a4 = createSound('sounds/A4.mp3');
+    this.b4 = createSound('sounds/B4.mp3');
+    this.c4 = createSound('sounds/C4.mp3');
 
     this.state = {currentSounds: [] };
 
