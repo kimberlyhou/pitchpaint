@@ -13,6 +13,10 @@ import {
   TouchableOpacity,
   Platform,
 } from 'react-native';
+import {
+	StackNavigator,
+} from 'react-navigation';
+import SignatureCapture from 'react-native-signature-capture';
 const Sound = require('react-native-sound');
 
 // const c3_sound = require('sounds/C3.mp3');
@@ -45,7 +49,7 @@ function createSound(fileName){
   return s
 }
 
-export default class PitchPaint extends Component {
+class PlaySound extends Component {
 
   constructor(props) {
     super(props);
@@ -66,7 +70,6 @@ export default class PitchPaint extends Component {
       sound.play();
     }
 
-
     this.stopSoundLooped = (sound) => {
         sound.stop();
         var index = this.state.currentSounds.indexOf(sound);
@@ -80,6 +83,7 @@ export default class PitchPaint extends Component {
   }
 
   render() {
+  	const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -93,10 +97,38 @@ export default class PitchPaint extends Component {
         <Feature title="Audio" buttonLabel={'A4'} onPress={() =>this.doSound(this.a4)}/>
         <Feature title="Audio" buttonLabel={'B4'} onPress={() =>this.doSound(this.b4)}/>
         <Feature title="Audio" buttonLabel={'C4'} onPress={() =>this.doSound(this.c4)}/>
+        <Button title="Go to canvas" 
+        onPress={() => navigate('DrawingBoard')}
+        />
       </View>
     );
   }
 }
+
+
+class Canvas extends Component {
+
+  render() {
+    return (
+       <View style={{ flex: 1, flexDirection: "column" }}>
+                <Text style={{alignItems:"center",justifyContent:"center"}}>Signature Capture Extended </Text>
+                <SignatureCapture
+                    style={[{flex:1},styles.signature]}
+                    ref="sign"
+                    onSaveEvent={this._onSaveEvent}
+                    onDragEvent={this._onDragEvent}
+                    saveImageFileInExtStorage={false}
+                    showNativeButtons={false}
+                    viewMode={"portrait"}/>
+
+  
+
+            </View>
+    );
+  }
+}
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -127,7 +159,21 @@ const styles = StyleSheet.create({
   feature: {
     padding: 5,
     alignSelf: 'stretch',
+  },
+  signature: {
+        flex: 1,
+        borderColor: '#000033',
+        borderWidth: 1,
+  },
+  buttonStyle: {
+        flex: 1, justifyContent: "center", alignItems: "center", height: 50,
+        backgroundColor: "#eeeeee",
+        margin: 10
   }
 });
 
+const PitchPaint = StackNavigator({
+	Home: { screen: PlaySound },
+	DrawingBoard: { screen: Canvas },
+});
 AppRegistry.registerComponent('PitchPaint', () => PitchPaint);
