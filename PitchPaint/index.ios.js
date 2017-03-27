@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -12,6 +12,7 @@ import {
   View,
   TouchableOpacity,
   Platform,
+  TouchableHighlight,
 } from 'react-native';
 import {
 	StackNavigator,
@@ -108,6 +109,12 @@ class PlaySound extends Component {
 
 class Canvas extends Component {
 
+  static propTypes = { onSave: PropTypes.func }
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
        <View style={{ flex: 1, flexDirection: "column" }}>
@@ -116,17 +123,36 @@ class Canvas extends Component {
                     style={[{flex:1},styles.signature]}
                     ref="sign"
                     onSaveEvent={this._onSaveEvent}
-                    onDragEvent={this._onDragEvent}
-                    saveImageFileInExtStorage={false}
+                    
+                    saveImageFileInExtStorage={true}
                     showNativeButtons={false}
                     viewMode={"portrait"}/>
+                  <View style={{ flex: 1, flexDirection: "row" }}>
+                    <TouchableHighlight style={styles.buttonStyle}
+                        onPress={() => { this.saveSign() } } >
+                        <Text>Save</Text>
+                    </TouchableHighlight>
+                  </View>
 
   
 
             </View>
     );
   }
+  saveSign() {
+        this.refs["sign"].saveImage();
 }
+
+_onSaveEvent(result) {
+        //result.encoded - for the base64 encoded png
+        //result.pathName - for the file path name
+        
+        console.log(result);
+    }
+
+}
+
+
 
 
 
