@@ -12,6 +12,7 @@ import {
   View,
   TouchableOpacity,
   Platform,
+  Image,
 } from 'react-native';
 import {
 	StackNavigator,
@@ -26,6 +27,12 @@ const Header = ({children}) => (<Text style={styles.header}>{children}</Text>);
 const Button = ({title, onPress}) => (
   <TouchableOpacity onPress={onPress}>
     <Text style={styles.button}>{title}</Text>
+  </TouchableOpacity>
+);
+
+const Button1 = ({title, onPress}) => (
+  <TouchableOpacity onPress={onPress}>
+    <Text style={styles.button1}>{title}</Text>
   </TouchableOpacity>
 );
 
@@ -47,6 +54,31 @@ function createSound(fileName){
     console.log('duration in seconds: ' + s.getDuration() + 'number of channels: ' + s.getNumberOfChannels());
     });
   return s
+}
+
+class HomeScreen extends Component {
+
+  render() {
+    const {navigate} = this.props.navigation;
+    return(
+      //<View style={styles.welcome_screen}>
+        <Image source={require('./node_modules/splash.png')}  style={styles.backgroundImage}>
+          <Text style={styles.welcome1}>
+            PitchPaint!
+          </Text>
+          <Button1 title="Log In" 
+            onPress={() => navigate('DrawingBoard')}
+            />
+          <Button1 title="Open Canvas" 
+            onPress={() => navigate('DrawingBoard')}
+            />
+          <Button1 title="Check Out Sounds" 
+            onPress={() => navigate('Sounds')}
+            />  
+        </Image>
+      //</View>
+    );
+  };
 }
 
 class PlaySound extends Component {
@@ -71,13 +103,13 @@ class PlaySound extends Component {
     }
 
     this.stopSoundLooped = (sound) => {
-        sound.stop();
-        var index = this.state.currentSounds.indexOf(sound);
-        this.state.currentSounds.splice(index,1);
+      sound.stop();
+      var index = this.state.currentSounds.indexOf(sound);
+      this.state.currentSounds.splice(index,1);
     }
 
     this.doSound = (sound) => {
-      this.state.currentSounds.includes(sound) ? 
+      this.state.currentSounds.includes(sound) ?
         this.stopSoundLooped(sound) : this.playSoundLooped(sound);
     }
   }
@@ -87,7 +119,7 @@ class PlaySound extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to PitchPaint!
+          Welcome to PitchPaint !
         </Text>
         <Feature title="Audio" buttonLabel={'C3'} onPress={() =>this.doSound(this.c3)}/>
         <Feature title="Audio" buttonLabel={'D3'} onPress={()=> this.doSound(this.d3)}/>
@@ -137,10 +169,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  welcome_screen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+  },
+  welcome1: {
+    fontSize: 50,
+    backgroundColor: 'rgba(0,0,0,0)',
+    textAlign: 'center',
+    marginBottom: 300,
+    color: 'red',
+    fontFamily: 'Arial Rounded MT Bold',
+    fontWeight: 'bold',
   },
   instructions: {
     textAlign: 'center',
@@ -151,6 +197,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     backgroundColor: 'silver',
     padding: 5,
+  },
+  button1: {
+    fontSize: 25,
+    backgroundColor: 'blue',
+    padding: 5,
+    color: 'white',
+    marginBottom: 15,
+    fontFamily: 'Arial Rounded MT Bold',
+    textAlign: 'center',
+    borderWidth: 2,
+    borderColor: 'white',
   },
   header: {
     borderBottomWidth: 1,
@@ -169,11 +226,17 @@ const styles = StyleSheet.create({
         flex: 1, justifyContent: "center", alignItems: "center", height: 50,
         backgroundColor: "#eeeeee",
         margin: 10
+  },
+  backgroundImage: {
+    flex: 1,
+    width: null,
+    height: null,
   }
 });
 
 const PitchPaint = StackNavigator({
-	Home: { screen: PlaySound },
+	Home: { screen: HomeScreen },
+  Sounds: { screen: PlaySound },
 	DrawingBoard: { screen: Canvas },
 });
 AppRegistry.registerComponent('PitchPaint', () => PitchPaint);
