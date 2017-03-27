@@ -12,6 +12,7 @@ import {
   View,
   TouchableOpacity,
   Platform,
+  Image,
   TouchableHighlight,
 } from 'react-native';
 import {
@@ -61,7 +62,6 @@ class HomeScreen extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return(
-      //<View style={styles.welcome_screen}>
         <Image source={require('./node_modules/splash.png')}  style={styles.backgroundImage}>
           <Text style={styles.welcome1}>
             PitchPaint!
@@ -76,7 +76,6 @@ class HomeScreen extends Component {
             onPress={() => navigate('Sounds')}
             />  
         </Image>
-      //</View>
     );
   };
 }
