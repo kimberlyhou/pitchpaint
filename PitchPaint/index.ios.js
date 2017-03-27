@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -12,10 +12,10 @@ import {
   View,
   TouchableOpacity,
   Platform,
-  Image,
+  TouchableHighlight,
 } from 'react-native';
 import {
-	StackNavigator,
+  StackNavigator,
 } from 'react-navigation';
 import SignatureCapture from 'react-native-signature-capture';
 const Sound = require('react-native-sound');
@@ -115,7 +115,7 @@ class PlaySound extends Component {
   }
 
   render() {
-  	const {navigate} = this.props.navigation;
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -140,6 +140,12 @@ class PlaySound extends Component {
 
 class Canvas extends Component {
 
+  static propTypes = { onSave: PropTypes.func }
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
        <View style={{ flex: 1, flexDirection: "column" }}>
@@ -148,17 +154,36 @@ class Canvas extends Component {
                     style={[{flex:1},styles.signature]}
                     ref="sign"
                     onSaveEvent={this._onSaveEvent}
-                    onDragEvent={this._onDragEvent}
-                    saveImageFileInExtStorage={false}
+                    
+                    saveImageFileInExtStorage={true}
                     showNativeButtons={false}
                     viewMode={"portrait"}/>
+                  <View style={{ flex: 1, flexDirection: "row" }}>
+                    <TouchableHighlight style={styles.buttonStyle}
+                        onPress={() => { this.saveSign() } } >
+                        <Text>Save</Text>
+                    </TouchableHighlight>
+                  </View>
 
   
 
             </View>
     );
   }
+  saveSign() {
+        this.refs["sign"].saveImage();
 }
+
+_onSaveEvent(result) {
+        //result.encoded - for the base64 encoded png
+        //result.pathName - for the file path name
+        
+        console.log(result);
+    }
+
+}
+
+
 
 
 
@@ -235,8 +260,8 @@ const styles = StyleSheet.create({
 });
 
 const PitchPaint = StackNavigator({
-	Home: { screen: HomeScreen },
+  Home: { screen: HomeScreen },
   Sounds: { screen: PlaySound },
-	DrawingBoard: { screen: Canvas },
+  DrawingBoard: { screen: Canvas },
 });
 AppRegistry.registerComponent('PitchPaint', () => PitchPaint);
