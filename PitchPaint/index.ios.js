@@ -62,7 +62,7 @@ class HomeScreen extends Component {
   render() {
     const {navigate} = this.props.navigation;
     return(
-        <Image source={require('./node_modules/splash.png')}  style={styles.backgroundImage}>
+        <Image source={require('./images/splash.png')}  style={styles.backgroundImage}>
           <Text style={styles.welcome1}>
             PitchPaint!
           </Text>
