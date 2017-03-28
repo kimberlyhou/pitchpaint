@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "15.4.2",
     "react-native": "0.42.0",
-    "react-native-signature-capture": "^0.4.5",
+    "react-native-signature-capture": "kimberlyhou/react-native-signature-capture",
     "react-native-sound": "^0.9.1",
     "react-navigation": "^1.0.0-beta.7"
   },
