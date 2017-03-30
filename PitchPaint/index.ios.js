@@ -282,43 +282,63 @@ class MyCanvas extends Component {
 
   constructor(props) {
     super(props);
+    this.state = { imagePath: '' };
   }
+
 
   render() {
+    var colors = ['#7cfc00', '#ffd700', '#c71585', '#6a5acd', '#1e90ff'];
+    var colorStyleList = [styles.lawnGreen, styles.gold, styles.mediumVioletRed, 
+                              styles.slateBlue, styles.dodgerBlue];
     return (
        <View style={{ flex: 1, flexDirection: "column" }}>
-                <Text style={{alignItems:"center",justifyContent:"center"}}>Signature Capture Extended </Text>
-                <SignatureCapture
-                    style={[{flex:1},styles.signature]}
-                    ref="sign"
-                    onSaveEvent={this._onSaveEvent}
-                    
-                    saveImageFileInExtStorage={true}
-                    showNativeButtons={false}
-                    viewMode={"portrait"}/>
-                  <View style={{ flex: 1, flexDirection: "row" }}>
-                    <TouchableHighlight style={styles.buttonStyle}
-                        onPress={() => { this.saveSign() } } >
-                        <Text>Save</Text>
-                    </TouchableHighlight>
-                  </View>
+          <SignatureCapture
+              style={[{flex:1},styles.signature]}
+              ref="sign"
+              onSaveEvent={this._onSaveEvent}
+              
+              saveImageFileInExtStorage={true}
+              showNativeButtons={false}
+              viewMode={"portrait"}/>
 
-  
-
+            <View style={{ flex: 1, flexDirection: "row" }}>
+              <TouchableHighlight style={styles.buttonStyle}
+                  onPress={() => { this.saveSign() } } >
+                  <Text>Save</Text>
+              </TouchableHighlight>
             </View>
+
+            <View style={{ flex: 1, flexDirection: "column" }}>
+        
+              {colorStyleList.map(function(color, index){
+                  return (
+                       <TouchableHighlight style={color}
+                            onPress={ () => {} } key={index}>
+                            <Text></Text>
+                      </TouchableHighlight>
+
+                   );
+                })} 
+          
+            </View>
+        </View>
     );
   }
+
+
   saveSign() {
         this.refs["sign"].saveImage();
-}
+  }
 
-_onSaveEvent(result) {
-        //result.encoded - for the base64 encoded png
-        //result.pathName - for the file path name
-        
-        console.log(result);
+  _onSaveEvent = (result) => {
+          //result.encoded - for the base64 encoded png
+          //result.pathName - for the file path name
+          
+          console.log(result);
+          this.setState({ imagePath: result.pathName });
+          console.log(this.state.imagePath);
+
     }
-
 }
 
 
@@ -382,13 +402,62 @@ const styles = StyleSheet.create({
   },
   signature: {
         flex: 1,
-        borderColor: '#000033',
         borderWidth: 1,
   },
   buttonStyle: {
         flex: 1, justifyContent: "center", alignItems: "center", height: 50,
         backgroundColor: "#eeeeee",
         margin: 10
+  },
+  lawnGreen: {
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    backgroundColor: "#7cfc00",
+    margin: 10
+  },
+  gold: {
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    backgroundColor: "#ffd700",
+    margin: 10
+  },
+  mediumVioletRed: {
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    backgroundColor: "#c71585",
+    margin: 10
+  },
+  slateBlue: {
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    backgroundColor: "#6a5acd",
+    margin: 10
+  },
+  dodgerBlue: {
+    flex: 1, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    backgroundColor: "#1e90ff",
+    margin: 10
   },
   backgroundImage: {
     flex: 1,
