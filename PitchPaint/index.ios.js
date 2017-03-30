@@ -160,7 +160,7 @@ class canvasApp extends Component{
     );
   };
 };
-//////
+
 
 const Header = ({children}) => (<Text style={styles.header}>{children}</Text>);
 
@@ -291,7 +291,8 @@ class MyCanvas extends Component {
     var colorStyleList = [styles.lawnGreen, styles.gold, styles.mediumVioletRed, 
                               styles.slateBlue, styles.dodgerBlue];
     return (
-       <View style={{ flex: 1, flexDirection: "column" }}>
+    
+       <View style={{ flex: 1, flexDirection: "row" }}>
           <SignatureCapture
               style={[{flex:1},styles.signature]}
               ref="sign"
@@ -306,9 +307,15 @@ class MyCanvas extends Component {
                   onPress={() => { this.saveSign() } } >
                   <Text>Save</Text>
               </TouchableHighlight>
+              <TouchableHighlight style={styles.buttonStyle}
+                  onPress={() => { this.resetSign() } } >
+                  <Text>Reset</Text>
+              </TouchableHighlight>
             </View>
 
-            <View style={{ flex: 1, flexDirection: "column" }}>
+            <View style={{ flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center', }}>
         
               {colorStyleList.map(function(color, index){
                   return (
@@ -328,6 +335,10 @@ class MyCanvas extends Component {
 
   saveSign() {
         this.refs["sign"].saveImage();
+  }
+
+  resetSign() {
+        this.refs["sign"].resetImage();
   }
 
   _onSaveEvent = (result) => {
@@ -407,15 +418,15 @@ const styles = StyleSheet.create({
   buttonStyle: {
         flex: 1, justifyContent: "center", alignItems: "center", height: 50,
         backgroundColor: "#eeeeee",
-        margin: 10
+        margin: 2
   },
   lawnGreen: {
     flex: 1, 
     justifyContent: "center", 
     alignItems: "center", 
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
     backgroundColor: "#7cfc00",
     margin: 10
   },
@@ -423,9 +434,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: "center", 
     alignItems: "center", 
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
     backgroundColor: "#ffd700",
     margin: 10
   },
@@ -433,9 +444,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: "center", 
     alignItems: "center", 
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
     backgroundColor: "#c71585",
     margin: 10
   },
@@ -443,9 +454,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: "center", 
     alignItems: "center", 
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
     backgroundColor: "#6a5acd",
     margin: 10
   },
@@ -453,9 +464,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: "center", 
     alignItems: "center", 
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
     backgroundColor: "#1e90ff",
     margin: 10
   },
@@ -469,6 +480,6 @@ const styles = StyleSheet.create({
 const PitchPaint = StackNavigator({
   Home: { screen: HomeScreen },
   Sounds: { screen: PlaySound },
-  DrawingBoard: { screen: canvasApp },
+  DrawingBoard: { screen: MyCanvas },
 });
 AppRegistry.registerComponent('PitchPaint', () => PitchPaint);
