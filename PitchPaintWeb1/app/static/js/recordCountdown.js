@@ -19,6 +19,6 @@ var playCountdown = function() {
 		var playSound = context.createBufferSource(); // Declare a New Sound
 		playSound.buffer = beepBuffer; // Attatch our Audio Data as it's Buffer
 		playSound.connect(context.destination);  // Link the Sound to the Output
-		playSound.start(context.currentTime+i); // Play the Sound Immediately
+		playSound.start(context.currentTime); // Play the Sound Immediately
 }
 }
