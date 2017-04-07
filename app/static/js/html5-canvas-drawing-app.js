@@ -1,4 +1,5 @@
-var canvas = document.getElementById('canvasDiv');
+var canvas;
+
 var colors = {
     '#EB023C' : "C3",
     '#0292EB' : "D3",
@@ -11,8 +12,11 @@ var colors = {
 
 }
 
+function canvas_init(){
+
 // console.log(colors);
 // Drawing Management
+canvas = document.getElementById('canvasDiv');
 var drawColor = Object.keys(colors)[0];
 var ctx = canvas.getContext('2d'); 
 var painting = document.getElementById('paintDiv');
@@ -112,19 +116,19 @@ Object.keys(colors).forEach( function(clr) {
 
 });
 
-var clm = 0;
-function setColumn(num) {clm = num;}
-function getColumn() {
-    var clrClm = [];  
-    clm = clm % canvas.width;
-    for (var j = 0; j < canvas.height; j++){
+}
+
+function getColumn(cvs,clm) {
+    var clrClm = []; 
+    var ctx = cvs.getContext('2d'); 
+    clm = clm % cvs.width;
+    for (var j = 0; j < cvs.height; j++){
         var imgData = ctx.getImageData(clm,j,1,1);
         var data = imgData.data;
         var pxlClr = rgbToHex(data[0], data[1], data[2]);
         if (pxlClr == '#000000' | !(Object.keys(colors)).includes(pxlClr)) continue;
         if (!clrClm.includes(pxlClr)) { clrClm.push(pxlClr); }
     }
-  clm++;
   return clrClm;
 }
 

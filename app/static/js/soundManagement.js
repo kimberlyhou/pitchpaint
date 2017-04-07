@@ -1,6 +1,5 @@
 var context;
 var soundMapping = {}; 
-var cool;
 document.addEventListener('DOMContentLoaded', loadSound);
 
 
@@ -13,7 +12,7 @@ function loadSound() {
 
 function createMapping(colors){
 	Object.keys(colors).forEach( function(clr) { 
-	loadSound(clr,colors[clr]);
+	if (colors[clr] != undefined) loadSound(clr,colors[clr]);
 	});
 }
 
@@ -28,7 +27,6 @@ var loadSound = function(clr, soundname) {
 		context.decodeAudioData(getSound.response, function(buffer){
 			var soundBuffer = buffer; // Decode the Audio Data and Store it in a Variable
 			soundMapping[clr] = soundBuffer;
-			cool = buffer;
 		});
 	}
 	getSound.send(); // Send the Request and Load the File
@@ -57,7 +55,6 @@ function pause() {
 		currentSounds[clr].stop();
 	});
 	currentSounds = {};
-	setColumn(0);
 }
 
 
@@ -67,10 +64,8 @@ function play(){
 	var j= 0;
 
 	while (i<800){ //loop
-		console.log(i);
-
 		if (j % speed == 0){
-			var clmColors = getColumn();
+			var clmColors = getColumn(canvas,i);
 			var currentColors = Object.keys(currentSounds);
 			clmColors.forEach(function (clm_clr){ 
 				if (!currentColors.includes(clm_clr)){

@@ -26,5 +26,7 @@
 
 <script src="{{ url_for('static', filename='js/html5-canvas-drawing-app.js') }}"></script>
 <script src="{{ url_for('static', filename='js/soundManagement.js') }}"></script>
+<script> canvas_init(); </script>
+<script> document.addEventListener('DOMContentLoaded', loadSound); </script>
 
 {% endblock %}
