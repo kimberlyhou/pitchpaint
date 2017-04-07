@@ -2,6 +2,7 @@ function test_getColumn1(){
 	var canvas = document.createElement('canvas');
 	var ctx = canvas.getContext('2d');
 	var bgr = new Image();
+	bgr.crossOrigin = "Anonymous";
 	bgr.src = 'testpics/test1.png';
 	bgr.onload = function(){
 		canvas.height = bgr.height;
@@ -17,6 +18,7 @@ function test_getColumn2(){
 	var canvas = document.createElement('canvas');
 	var ctx = canvas.getContext('2d');
 	var bgr = new Image();
+	bgr.crossOrigin = "Anonymous";
 	bgr.src = 'testpics/test2.png';
 	bgr.onload = function(){
 		canvas.height = bgr.height;
@@ -32,6 +34,7 @@ function test_getColumn3(){
 	var canvas = document.createElement('canvas');
 	var ctx = canvas.getContext('2d');
 	var bgr = new Image();
+	bgr.crossOrigin = "Anonymous";
 	bgr.src = 'testpics/test3.png';
 	bgr.onload = function(){
 		canvas.height = bgr.height;
