@@ -1,23 +1,17 @@
-language: objective-c
-osx_image: xcode8.2
-xcode_sdk: iphonesimulator10.2
+sudo: false
+language: node_js
 
-install:
-  - mkdir -p /Users/travis/build/facebook/.nvm
-  - export NVM_DIR="/Users/travis/build/facebook/.nvm"
-  - brew install nvm
-  - source $(brew --prefix nvm)/nvm.sh
+before_install:
+  - curl https://install.meteor.com | /bin/sh
+  - npm install 
+  - exporrt PATH = "$HOME/.meteor:$PATH"
 
-  # Use node 6 because that is what runs on land-blocking tests
-  - nvm install 6
-  - rm -Rf "${TMPDIR}/jest_preprocess_cache"
-  - wget https://github.com/yarnpkg/yarn/releases/download/v0.16.0/yarn-0.16.0.js
-  - export yarn="node $(pwd)/yarn-0.16.0.js"
-  - $yarn install
-
+cache:
+  directories:
+    - node_modules
 
 before_script:
-  - npm run compile:test
+  - meteor npm install
 
 script:
-  - npm test
+  - meteor npm run test

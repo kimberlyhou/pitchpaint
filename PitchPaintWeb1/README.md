@@ -1,1 +1,0 @@
-PitchPaint Web Interface
