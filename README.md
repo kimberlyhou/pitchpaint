@@ -1,20 +1,17 @@
 # PitchPaint
 
-PitchPaint uses ReactNative to target a cross-platform userbase.
- 
-To get started please follow these instructions to set up your environment:
+PitchPaint uses Meteor 1.4 to target a cross-platform userbase.
 
->Please follow this link for specific instructions:
-https://facebook.github.io/react-native/docs/getting-started.html
-
-In a directory unrelated to our repo test the following:
+If setting up your environment, please install Meteor and Node/npm or follow these instructions to set up your environment (OSX/Linux):
 ```sh
-#test your environment works
-react-native init TestProject 
-cd TestProject 
-#before you run make sure XCode is open, 
-#otherwise your project will not compile in the simulator
-react-native run-ios
+curl https://install.meteor.com/ | sh
+# depending on which OS, download Node through this site: https://nodejs.org/en/download/package-manager/
 ```
 
-Once you have set up your environment branch your own copy of the repository
+To run this application for the first time, follow the commands below:
+```
+cd pitchpaint
+meteor npm install
+meteor run
+```
+
