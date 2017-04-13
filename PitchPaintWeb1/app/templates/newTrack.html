@@ -12,27 +12,19 @@
 <br>
 
 </div> 
-
+<div class = "row center" id = "paletteDiv"></div>
 <div class ="row center z-depth-5" id="paintDiv">
-      <div id = "paletteDiv"></div>
       <canvas id="canvasDiv"></canvas>
   </div>
 
 
 <div class="row center">
-<button class= " waves-effect waves-light btn" onclick ="togglePlay()">Play</button>
-<button class= " waves-effect waves-light btn" onclick ="saveDrawing()">Save</button>
+<button class= "waves-effect waves-light btn" onclick ="togglePlay()">Play</button>
+<button class= "waves-effect waves-light btn" onclick ="">Save</button>
 </div>
 
 
-
-<!-- <script src="{{ url_for('static', filename='js/wavesurferMyEdits.js') }}"></script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
- <script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
-<script src="{{ url_for('static', filename='js/newTrack.js') }}"></script>
-<script src="{{ url_for('static', filename='js/recordCountdown.js') }}"></script> -->
-<!--[if IE]><script type="text/javascript" src="{{ url_for('static', filename='js/excanvas.js') }}"></script><![endif]-->
 <script src="{{ url_for('static', filename='js/html5-canvas-drawing-app.js') }}"></script>
+<script src="{{ url_for('static', filename='js/soundManagement.js') }}"></script>
 
 {% endblock %}

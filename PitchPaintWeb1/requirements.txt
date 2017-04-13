@@ -1,0 +1,4 @@
+pymongo==2.9
+Flask==0.10.1
+mongoengine==0.10.0
+rauth==0.7.2
