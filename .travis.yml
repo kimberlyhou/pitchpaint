@@ -1,12 +1,17 @@
-language: python
-python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
-# command to install dependencies
-install:
-  - pip install -r requirements.txt
-  - pip install -U pytest
-# command to run tests
-script: pytest
+sudo: false
+language: node_js
+
+before_install:
+  - curl https://install.meteor.com | /bin/sh
+  - npm install 
+  - exporrt PATH = "$HOME/.meteor:$PATH"
+
+cache:
+  directories:
+    - node_modules
+
+before_script:
+  - meteor npm install
+
+script:
+  - meteor npm run test
