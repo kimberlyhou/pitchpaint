@@ -14,4 +14,3 @@ cd pitchpaint
 meteor npm install
 meteor run
 ```
-

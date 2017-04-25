@@ -1,5 +1,5 @@
 {
-  "name": "PitchPaintMeteor",
+  "name": "pitchpaint",
   "private": true,
   "scripts": {
     "start": "meteor run"
