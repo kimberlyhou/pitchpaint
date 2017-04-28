@@ -1,6 +1,7 @@
 if (Meteor.isClient) {
     // Setup routing.
     FlowRouter.route('/', {
+    	name: 'homeScreen',
     	action: function() {
     		BlazeLayout.render('layout', { main: 'index'});
     	}
@@ -9,7 +10,7 @@ if (Meteor.isClient) {
     FlowRouter.route('/newCanvas', {
       name: 'newCanvas',
 	  action: function() {
-	    BlazeLayout.render('layout', { main: 'canvas' });
+	    BlazeLayout.render('layout', { main: 'canvas_template' });
 	  }
 	});
     
