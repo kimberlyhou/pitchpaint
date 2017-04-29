@@ -14,3 +14,8 @@ cd pitchpaint
 meteor npm install
 meteor run
 ```
+When the program is running, you can access the Meteor.users database by opening a new tab in terminal and typing the following:
+```
+meteor mongo
+db.users.find({})   # this will list all the users in the database on your local environment
+```
