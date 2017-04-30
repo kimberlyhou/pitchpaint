@@ -9,7 +9,6 @@
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <script src="init.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
 
@@ -17,14 +16,14 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body >
+<body id="bootstrap-overrides">
 
 
       <div class="navbar-fixed">
         <nav class="blue-grey darken-2">
           <div class="nav-wrapper">
             <div class="nav-container">
-              <div><a href="" class="brand-logo">PitchPaint</a></div>
+              <div><a href="{{pathFor 'homeScreen' }}" class="brand-logo">PitchPaint</a></div>
 
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><div class="new-track-btn-container">
@@ -42,7 +41,8 @@
                 Hi, {{current_user.username }}! -->
                 </ul></a></li>
 
-            <li><a href="">Logout </a></li>
+            <!-- <li><a href="{{pathFor 'signin'}}">Login</a></li> -->
+            <li>{{> atNavButton}}</li>
                     <!-- {% endif %} -->
 
                 <!-- {% if not current_user.is_authenticated %}
@@ -58,6 +58,7 @@
       </div>
       	{{> Template.dynamic template=main}}
             <!-- {{> yield}} -->
+        }
   </body>
 </template>
 
@@ -88,7 +89,23 @@
           </div>
         </div>
       </div>
-      <div class="parallax"><img src="/static/img/paint_background.jpeg"></div>
+      <div class="parallax"><img src="static/img/paint_background.jpeg"></div>
   
+</template>
+
+
+<template name="private">
+  <div class="container">   
+    <div class="text-center">
+      <h1>This is private stuff!</h1>
+    </div>
+  </div>
+</template>
+
+<template name="pageNotFound">
+  <div class="container">
+    <h3>404 - Houston, we have a problem!!!</h3>
+    <h5>The page you're looking for was not found.</h5>
+  </div>
 </template>
 

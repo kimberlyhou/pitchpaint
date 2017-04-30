@@ -41,6 +41,9 @@ button {
 	background-color: #009688;
 }
 
+.parallax {
+    background-image: url('http://shunvmall.com/data/out/18/47136256-background-wallpaper.jpg');
+}
 
 .new-track-btn-container{
 	padding-right: 20px;
@@ -61,7 +64,7 @@ button {
 .big_header{
 	font-size: 5em;
 	font-weight: 100;
-	color: white;
+	color: black;
 }
 
 .small_header_container{
@@ -72,7 +75,7 @@ button {
 .small_header{
 	font-size: 2em;
 	font-weight: 300;
-	color: white;
+	color: black;
 }
 
 .trackBox {
@@ -149,6 +152,10 @@ button {
 
 .howToSection {
     background: linear-gradient(white, #DFEBF2) ;
+}
+
+#bootstrap-overrides button {
+    padding: 0 2rem;
 }
 
 .editButton {
