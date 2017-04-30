@@ -8,7 +8,7 @@ curl https://install.meteor.com/ | sh
 # depending on which OS, download Node through this site: https://nodejs.org/en/download/package-manager/
 ```
 
-To run this application for the first time, follow the commands below:
+To run this application for the first time, follow the commands below (please run using Chrome):
 ```
 cd pitchpaint
 meteor npm install
