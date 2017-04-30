@@ -118,9 +118,11 @@ Template.instance().canvas = canvas;
 
 
 var soundMapping = {}; 
+var context = null;
+var cool = null;
 
 
-function loadAllSounds() {
+loadAllSounds = function loadAllSounds() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
     createMapping(colors);
@@ -131,14 +133,17 @@ function createMapping(colors){
 	Object.keys(colors).forEach( function(clr) { 
 	loadSound(clr,colors[clr]);
 	});
+    Template.instance().soundMapping = soundMapping;
 }
 
 
 
-var loadSound = function(clr, soundname) {	
+function loadSound(clr, soundname) {	
  // Create the Sound 
 	var getSound = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
-	getSound.open("GET", "../sounds/"+soundname+".mp3", true); // Path to Audio File
+    path = "/sounds/"+soundname+".mp3"
+    console.log(path);
+	getSound.open("GET", path, true); // Path to Audio File
 	getSound.responseType = "arraybuffer"; // Read as Binary Data
 	getSound.onload = function() {
 		context.decodeAudioData(getSound.response, function(buffer){
@@ -151,7 +156,7 @@ var loadSound = function(clr, soundname) {
 
 }
 
-var getSound = function(clr,map) {
+function getSound(clr,map) {
 	var playSound = context.createBufferSource(); // Declare a New Sound
 	playSound.buffer = map[clr]; // Attatch our Audio Data as it's Buffer
 	playSound.connect(context.destination);
@@ -186,10 +191,6 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
-
-var context;
-var cool;
-document.addEventListener('DOMContentLoaded', function(){console.log("HERE");loadAllSounds});
 
 
 Template.instance().togglePlay = function togglePlay(){
@@ -241,12 +242,15 @@ function play(){
 }
 
 
+loadAllSounds();
 };
 
 
 Template.canvas_template.events({
     'click #play': function(e){ 
     	Template.instance().togglePlay();
+    
+
 
      }
 });
