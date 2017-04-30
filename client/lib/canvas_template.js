@@ -211,7 +211,7 @@ function pause() {
 
 
 function play(){
-	var speed = 1;
+	var speed = 25;
 	var i = 0;
 	var j= 0;
 
