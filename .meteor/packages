@@ -26,3 +26,4 @@ jquery
 useraccounts:flow-routing
 accounts-password
 useraccounts:bootstrap
+dispatch:mocha
