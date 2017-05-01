@@ -2,16 +2,12 @@
   "name": "pitchpaint",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
-    "start": "meteor run",
-    "test": "./node_modules/mocha/bin/mocha --reporter spec"
-=======
     "start": "meteor run"
->>>>>>> 5aa628b7b77d4a5d1fd4d3149b18720eb1d564c9
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
     "bcrypt": "^1.0.2",
+    "chai": "^3.5.0",
     "meteor-node-stubs": "~0.2.4"
   }
 }

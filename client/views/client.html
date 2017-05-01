@@ -23,25 +23,29 @@
           <div class="nav-wrapper">
             <div class="nav-container">
               <div><a href="{{pathFor 'homeScreen' }}" class="brand-logo">PitchPaint</a></div>
-
+              <!-- <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
               <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
-              <ul id="nav-mobile" class="right">
-                <li><div class="new-track-btn-container">
-                  
+              <ul id="" class="right hide-on-med-and-down">
+                <li><div class="new-track-btn-container"> 
                   <a href="{{pathFor 'newCanvas' }}" title="New Sketch" class="login-btn right waves-effect waves-light btn">New Drawing</a>
                 </div></li>
                 <li><div class="new-track-btn-container">
                   <a href="" class="login-btn right waves-effect waves-light btn">Search Drawings</a>
                 </div></li>
-
-                <li><a href=""><ul>
-   
-                </ul></a></li>
     
                   <li>{{> atNavButton}}</li>
-       
               
               </ul>
+              <!--<ul class="side-nav" id="mobile-demo">
+                <li>
+                  <a href="{{pathFor 'newCanvas' }}" title="New Sketch" class="login-btn right waves-effect waves-light btn">New Drawing</a>
+                </li>
+                <li>
+                  <a href="" class="login-btn right waves-effect waves-light btn">Search Drawings</a>
+                </li>
+    
+                  <li>{{> atNavButton}}</li>
+              </ul>-->
             </div>
           </div>
         </nav>
@@ -50,6 +54,71 @@
         
   </body>
 </template>
+
+<template name="mobileLayout">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>PitchPaint</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
+
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body id="bootstrap-overrides">
+
+      <div class="navbar-fixed">
+        <nav class="blue-grey darken-2">
+          <div class="nav-wrapper">
+            <div class="nav-container">
+              <div><a href="{{pathFor 'homeScreen' }}" class="brand-logo">PitchPaint</a></div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <ul class="no-margin">
+        <li>
+          <a href="{{pathFor 'newCanvas' }}" title="New Sketch" class="block login-btn waves-effect waves-light btn">New Drawing</a>
+        </li>
+        <li>
+          <a href="" class="block login-btn waves-effect waves-light btn">Search Drawings</a>
+        </li>
+
+          <li><a href="" class="background block login-btn waves-effect waves-light btn">{{> atNavButton}}</a></li>
+      </ul>
+
+      {{> Template.dynamic template=main}}
+      
+</body>
+</template>
+
+<template name="mobileIndex">
+    <div class="valign">
+        <div class="section no-pad-bot">
+          
+            <div class="row center">
+              <h5 class="header col s12 mobile_welcome left-align">Create paintings that get transformed into music.</h5>
+            </div>
+          
+         
+            <div class="row center">
+              <h6 class="header col s12 mobile_welcome left-align">PitchPaint takes your drawings and transforms them into musical tracks based on your musical and artistic vision.</h6>
+            </div>
+          
+        </div>
+      </div>
+</template>
+
 
 <template name="index">
 	
