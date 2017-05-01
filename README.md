@@ -8,9 +8,14 @@ curl https://install.meteor.com/ | sh
 # depending on which OS, download Node through this site: https://nodejs.org/en/download/package-manager/
 ```
 
-To run this application for the first time, follow the commands below:
+To run this application for the first time, follow the commands below (please run using Chrome):
 ```
 cd pitchpaint
 meteor npm install
 meteor run
+```
+When the program is running, you can access the Meteor.users database by opening a new tab in terminal and typing the following:
+```
+meteor mongo
+db.users.find({})   # this will list all the users in the database on your local environment
 ```

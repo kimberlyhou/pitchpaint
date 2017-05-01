@@ -1,3 +1,5 @@
+<template name="layout">
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -7,7 +9,6 @@
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <script src="init.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
 
@@ -15,52 +16,154 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body >
-
+<body id="bootstrap-overrides">
 
       <div class="navbar-fixed">
         <nav class="blue-grey darken-2">
           <div class="nav-wrapper">
             <div class="nav-container">
-              <div><a href="" class="brand-logo">PitchPaint</a></div>
-
-              <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><div class="new-track-btn-container">
-                  <a href="" class="login-btn right waves-effect waves-light btn">New Drawing</a>
+              <div><a href="{{pathFor 'homeScreen' }}" class="brand-logo">PitchPaint</a></div>
+              <!-- <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
+              <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
+              <ul id="" class="right hide-on-med-and-down">
+                <li><div class="new-track-btn-container"> 
+                  <a href="{{pathFor 'newCanvas' }}" title="New Sketch" class="login-btn right waves-effect waves-light btn">New Drawing</a>
                 </div></li>
                 <li><div class="new-track-btn-container">
                   <a href="" class="login-btn right waves-effect waves-light btn">Search Drawings</a>
                 </div></li>
-
-                <li><a href=""><ul>
-             <!--    {% if current_user.is_authenticated %}
-                    <li><i class="material-icons">perm_identity</i></li>
-                Hi, {{current_user.username }}! -->
-                </ul></a></li>
-
-            <li><a href="">Logout </a></li>
-                    <!-- {% endif %} -->
-
-
-
-                <!-- {% if not current_user.is_authenticated %}
-                <li><div class="login-btn-container">
-                  <a href="{{ url_for('login.oauth_authorize', provider='facebook') }}" class="login-btn right waves-effect waves-light btn">Login</a>
-                </div></li>
-                {% endif %} -->
+    
+                  <li>{{> atNavButton}}</li>
               
               </ul>
+              <!--<ul class="side-nav" id="mobile-demo">
+                <li>
+                  <a href="{{pathFor 'newCanvas' }}" title="New Sketch" class="login-btn right waves-effect waves-light btn">New Drawing</a>
+                </li>
+                <li>
+                  <a href="" class="login-btn right waves-effect waves-light btn">Search Drawings</a>
+                </li>
+    
+                  <li>{{> atNavButton}}</li>
+              </ul>-->
             </div>
           </div>
         </nav>
       </div>
-            <!-- {{> yield}} -->
+      	{{> Template.dynamic template=main}}
+        
   </body>
-
-<template name="navigationBar">
-	<div>Hello there!</div>
 </template>
 
-<template name="home">
-	<div> Home </div>
+<template name="mobileLayout">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>PitchPaint</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
+
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body id="bootstrap-overrides">
+
+      <div class="navbar-fixed">
+        <nav class="blue-grey darken-2">
+          <div class="nav-wrapper">
+            <div class="nav-container">
+              <div><a href="{{pathFor 'homeScreen' }}" class="brand-logo">PitchPaint</a></div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <ul class="no-margin">
+        <li>
+          <a href="{{pathFor 'newCanvas' }}" title="New Sketch" class="block login-btn waves-effect waves-light btn">New Drawing</a>
+        </li>
+        <li>
+          <a href="" class="block login-btn waves-effect waves-light btn">Search Drawings</a>
+        </li>
+
+          <li><a href="" class="background block login-btn waves-effect waves-light btn">{{> atNavButton}}</a></li>
+      </ul>
+
+      {{> Template.dynamic template=main}}
+      
+</body>
 </template>
+
+<template name="mobileIndex">
+    <div class="valign">
+        <div class="section no-pad-bot">
+          
+            <div class="row center">
+              <h5 class="header col s12 mobile_welcome left-align">Create paintings that get transformed into music.</h5>
+            </div>
+          
+         
+            <div class="row center">
+              <h6 class="header col s12 mobile_welcome left-align">PitchPaint takes your drawings and transforms them into musical tracks based on your musical and artistic vision.</h6>
+            </div>
+          
+        </div>
+      </div>
+</template>
+
+
+<template name="index">
+	
+      <div class="valign">
+        <div class="section no-pad-bot">
+          <div class="big_header_container">
+            <div class="row center">
+              <h5 class="header col s12 big_header left-align">Create paintings that get transformed into music</h5>
+            </div>
+          </div>
+          <div class="small_header_container">
+            <div class="row center">
+              <h3 class="header col s12 small_header left-align">PitchPaint takes your drawings and transforms them into musical tracks based on your musical and artistic vision.</h3>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+        <!--   <div class="row center">
+            {%if not current_user.is_authenticated%}
+            <a href="{{ url_for('login.oauth_authorize', provider='facebook') }}" class="signup-btn center waves-effect waves-light btn-large">Get Started with Facebook</a>
+            {% endif %}
+          </div> -->
+          <div class = "row center">
+       <!--      <a href="{{ url_for('home.howto_page') }}" class="center waves-effect waves-light btn">learn how to use</a> -->
+             <a href="" class="center waves-effect waves-light btn">learn how to use</a>
+          </div>
+        </div>
+      </div>
+      <div class="parallax"><img src="static/img/paint_background.jpeg"></div>
+  
+</template>
+
+
+<template name="private">
+  <div class="container">   
+    <div class="text-center">
+      <h1>This is private stuff!</h1>
+    </div>
+  </div>
+</template>
+
+<template name="pageNotFound">
+  <div class="container">
+    <h3>404 - Houston, we have a problem!!!</h3>
+    <h5>The page you're looking for was not found.</h5>
+  </div>
+</template>
+
