@@ -1,6 +1,6 @@
 console.log("cheeses");
 var expect    = require("chai").expect;
-var file_exists = require("client/lib/canvas_template.js");
+var file_exists = require("../lib/canvas_template.js");
 
 // Ewan's Notes / Test starting point:
 
