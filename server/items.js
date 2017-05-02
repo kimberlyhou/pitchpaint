@@ -26,6 +26,8 @@ Meteor.methods({
 
 'sketches.find'(){
   var results = Sketches.find({owner: Meteor.userId()}).fetch();
+  //console.log("LOGGING RESULTS"+results);
+  //console.log(results);
   return (results);
 },
 

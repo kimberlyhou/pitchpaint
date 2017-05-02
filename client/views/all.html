@@ -18,13 +18,34 @@
 			   <div class="col s6">
             <h3>All Available Drawings</h3>
 
+            <script>
+              function display( divs ) {
+              var a = [];
+              for ( var i = 0; i < divs.length; i++ ) {
+                a.push( divs[ i ].innerHTML );
+              }
+              $( "span" ).text( a.join(" ") );
+            }
+
+            display( $( "div" ).get() );
+            </script>
+
+
             <ul>
-             {{#each sketchLinks}}
+              {{#each sketchLinks}}
               {{> sketchLink}}
               {{/each}}
             </ul>
 
-      
+            <ul>
+              <div class = "black-text card-panel trackBox hoverable">
+              <h4></h4>
+              <ul>
+                <li> Title: Boy With Apple </li>
+                <li> Saved: 5/1/2017 </li>
+              </ul>
+            </div>
+            </ul>
 
           </div>
           <div class="col s6"></div>
@@ -38,12 +59,12 @@
 <template name="sketchLink">
   <li>
        <a href = "">
-      <div class = "white-text card-panel trackBox hoverable"> 
+      <div class = "black-text card-panel trackBox hoverable">
       <h4></h4>
       <ul>
         <li> Title: {{title}} </li>
         <li> Saved: {{savedAt}} </li>
-      </ul> 
+      </ul>
     </div>
     </a>
   </li>

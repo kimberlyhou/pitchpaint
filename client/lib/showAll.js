@@ -2,6 +2,7 @@
 Template.showAll.rendered = function () {
 // console.log(window.location.pathname);
 //background-color: #FF856F
+
 };
 
 Template.showAll.helpers({
@@ -16,10 +17,13 @@ Template.showAll.helpers({
 		  	});
 		}
   	  });
+      //onst found = Sketches.findOne({_id: 'hbdYoFCEehAcK8rzs'});
+
   	  //because call is async returns before finished loading
-  	console.log(finalSketches);
-	return finalSketches;
-}  
+  	   //console.log(finalSketches);
+	     return finalSketches;
+//return found;
+}
 
 
 
