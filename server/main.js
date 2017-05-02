@@ -3,16 +3,16 @@ import SimpleSchema from 'simpl-schema';
 
 Meteor.startup(() => {
   // code to run on server at startup
-  db = new Mongo.Collection('db');
+/*  sketchList = new Mongo.Collection('sketchList');
 
-  db.schema = new SimpleSchema({
+  sketchList.schema = new SimpleSchema({
   username: {type: String},
   title: {type: String, defaultValue: null, optional: true},
   file: {type: Object, defaultValue: null, optional: true},
   palette: {type: Object, defaultValue: null, optional: true},
 });
 
-db.insert({username: 'Ryan',
+/*db.insert({username: 'Ryan',
 title: 'BoyWithApple',
 file: null,
 palette: null})
@@ -24,7 +24,7 @@ palette: null})
     palette: null
   }
 
-  db.schema.validate(test);
+  sketchList.schema.validate(test); */
 
 
 });

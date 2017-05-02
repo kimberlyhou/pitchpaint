@@ -1,3 +1,5 @@
+
+
 Template.canvas_template.rendered = function() {
 var canvas = document.getElementById('canvasDiv');
 var colors = {
@@ -16,14 +18,14 @@ Template.instance().colors = colors;
 // console.log(colors);
 // Drawing Management
 var drawColor = Object.keys(colors)[0];
-var ctx = canvas.getContext('2d'); 
+var ctx = canvas.getContext('2d');
 var painting = document.getElementById('paintDiv');
 var paint_style = getComputedStyle(painting);
 canvas.width = parseInt(paint_style.getPropertyValue('width'));
 canvas.height = parseInt(paint_style.getPropertyValue('height'));
 
 var mouse = {x: 0, y: 0};
- 
+
 canvas.addEventListener('mousemove', function(e) {
   mouse.x = e.pageX - this.offsetLeft;
   mouse.y = e.pageY - this.offsetTop;
@@ -38,14 +40,14 @@ ctx.fillStyle = drawColor;
 canvas.addEventListener('mousedown', function(e) {
     ctx.beginPath();
     ctx.moveTo(mouse.x, mouse.y);
- 
+
     canvas.addEventListener('mousemove', onPaint, false);
 }, false);
- 
+
 canvas.addEventListener('mouseup', function() {
     canvas.removeEventListener('mousemove', onPaint, false);
 }, false);
- 
+
 var onPaint = function() {
     ctx.lineTo(mouse.x, mouse.y);
     ctx.stroke();
@@ -58,10 +60,10 @@ function drawDot(ctx,x,y,size) {
         ctx.fillStyle = ctx.fillSyle;
         // Draw a filled circle
         ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI*2, true); 
+        ctx.arc(x, y, size, 0, Math.PI*2, true);
         ctx.closePath();
         ctx.fill();
-    } 
+    }
 function sketchpad_touchStart() {
     // Update the touch co-ordinates
     getTouchPos();
@@ -71,11 +73,11 @@ function sketchpad_touchStart() {
 }
 
 // Draw something and prevent the default scrolling when touch movement is detected
-function sketchpad_touchMove(e) { 
+function sketchpad_touchMove(e) {
     // Update the touch co-ordinates
     getTouchPos(e);
     // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-    drawDot(ctx,touchX,touchY,12); 
+    drawDot(ctx,touchX,touchY,12);
     // Prevent a scrolling action as a result of this touchmove triggering.
     event.preventDefault();
 }
@@ -101,11 +103,11 @@ canvas.addEventListener('touchmove', sketchpad_touchMove, false);
 // Palette Management
 var palette = document.getElementById('paletteDiv');
 
-Object.keys(colors).forEach( function(clr) {    
+Object.keys(colors).forEach( function(clr) {
     var clrbtn = document.createElement('div');
     clrbtn.className = "waves-effect waves-light btn";
     clrbtn.style.backgroundColor = clr;
-    clrbtn.onclick = function (){ 
+    clrbtn.onclick = function (){
         ctx.strokeStyle = clr;
         ctx.fillStyle = clr;
     }
@@ -117,7 +119,7 @@ Object.keys(colors).forEach( function(clr) {
 Template.instance().canvas = canvas;
 
 
-var soundMapping = {}; 
+var soundMapping = {};
 var context = null;
 var cool = null;
 
@@ -130,7 +132,7 @@ loadAllSounds = function loadAllSounds() {
 
 
 function createMapping(colors){
-    Object.keys(colors).forEach( function(clr) { 
+    Object.keys(colors).forEach( function(clr) {
     loadSound(clr,colors[clr]);
     });
     Template.instance().soundMapping = soundMapping;
@@ -138,8 +140,8 @@ function createMapping(colors){
 
 
 
-function loadSound(clr, soundname) {    
- // Create the Sound 
+function loadSound(clr, soundname) {
+ // Create the Sound
     var getSound = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
     path = "/sounds/"+soundname+".mp3"
     console.log(path);
@@ -161,14 +163,14 @@ function getSound(clr,map) {
     playSound.buffer = map[clr]; // Attatch our Audio Data as it's Buffer
     playSound.connect(context.destination);
     playSound.loop = true;  // Link the Sound to the Output
-    return playSound;   
+    return playSound;
 }
 
 
 var clm = 0;
 function setColumn(num) {clm = num;}
 function getColumn() {
-    var clrClm = [];  
+    var clrClm = [];
     clm = clm % canvas.width;
     for (var j = 0; j < canvas.height; j++){
         var imgData = ctx.getImageData(clm,j,1,1);
@@ -221,7 +223,7 @@ function play(){
         if (j % speed == 0){
             var clmColors = getColumn();
             var currentColors = Object.keys(currentSounds);
-            clmColors.forEach(function (clm_clr){ 
+            clmColors.forEach(function (clm_clr){
                 if (!currentColors.includes(clm_clr)){
                     var soundClr = getSound(clm_clr, soundMapping);
                     currentSounds[clm_clr] = soundClr;
@@ -243,13 +245,24 @@ function play(){
 
 Template.instance().toggleSave = function toggleSave(){
         console.log("saving");
-        save();      
+        save();
 }
 
+/*
+  Saves the image to a Meteor Collection called sketches.
+  To check the collection's data:
+  cd into the project directory and run mongo shell
+  while an instance of the app is running
+*/
 function save() {
 
     var image = canvas.toDataURL("image/png");
-    console.log(image);
+    //grab the title the user entered
+    var title = document.getElementById('nameForm').value;
+    //save into collection called sketches, this is found in items.js
+    Meteor.call('sketches.insert', title , image);
+    console.log(title+" has been saved!");
+    //console.log(image);
     // save this image (along with other attributes) in a Drawings array/list as custom data under the user ID
 }
 
@@ -259,7 +272,7 @@ loadAllSounds();
 
 
 Template.canvas_template.events({
-    'click #play': function(e){ 
+    'click #play': function(e){
         Template.instance().togglePlay();
      },
 
@@ -268,5 +281,3 @@ Template.canvas_template.events({
      }
 
 });
-
-
