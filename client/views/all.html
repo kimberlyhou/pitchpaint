@@ -1,0 +1,50 @@
+<template name="showAll">
+
+  <nav>
+    <div class="nav-wrapper white">
+      <form id = "SearchForm" action="" method = "post">
+        <div class="input-field">
+           <input id = "search" type="search" placeholder = "Search For Tracks" name="search" required />
+          <label for="search"><i class="material-icons grey-text">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+
+    </div>
+  </nav>
+
+      <div class="container">
+      	<div class="row">
+			   <div class="col s6">
+            <h3>All Available Drawings</h3>
+
+            <ul>
+             {{#each sketchLinks}}
+              {{> sketchLink}}
+              {{/each}}
+            </ul>
+
+      
+
+          </div>
+          <div class="col s6"></div>
+
+		    </div>
+
+      </div>
+
+</template>
+
+<template name="sketchLink">
+  <li>
+       <a href = "">
+      <div class = "white-text card-panel trackBox hoverable"> 
+      <h4></h4>
+      <ul>
+        <li> Title: {{title}} </li>
+        <li> Saved: {{savedAt}} </li>
+      </ul> 
+    </div>
+    </a>
+  </li>
+</template>

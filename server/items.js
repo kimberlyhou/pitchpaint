@@ -22,5 +22,15 @@ Meteor.methods({
       username: Meteor.user().username,  //this might not be necessary
     });
   },
+
+
+'sketches.find'(){
+  var results = Sketches.find({owner: Meteor.userId()}).fetch();
+  return (results);
+},
+
+
+
+
   //add additional methods we want to apply on the collection here
 });
