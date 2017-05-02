@@ -102,15 +102,15 @@ canvas.addEventListener('touchmove', sketchpad_touchMove, false);
 var palette = document.getElementById('paletteDiv');
 
 Object.keys(colors).forEach( function(clr) {    
-	var clrbtn = document.createElement('div');
-	clrbtn.className = "waves-effect waves-light btn";
-	clrbtn.style.backgroundColor = clr;
-	clrbtn.onclick = function (){ 
-		ctx.strokeStyle = clr;
-		ctx.fillStyle = clr;
-	}
+    var clrbtn = document.createElement('div');
+    clrbtn.className = "waves-effect waves-light btn";
+    clrbtn.style.backgroundColor = clr;
+    clrbtn.onclick = function (){ 
+        ctx.strokeStyle = clr;
+        ctx.fillStyle = clr;
+    }
     clrbtn.innerHTML = colors[clr];
-	palette.appendChild(clrbtn);
+    palette.appendChild(clrbtn);
 
 });
 
@@ -130,38 +130,38 @@ loadAllSounds = function loadAllSounds() {
 
 
 function createMapping(colors){
-	Object.keys(colors).forEach( function(clr) { 
-	loadSound(clr,colors[clr]);
-	});
+    Object.keys(colors).forEach( function(clr) { 
+    loadSound(clr,colors[clr]);
+    });
     Template.instance().soundMapping = soundMapping;
 }
 
 
 
-function loadSound(clr, soundname) {	
+function loadSound(clr, soundname) {    
  // Create the Sound 
-	var getSound = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
+    var getSound = new XMLHttpRequest(); // Load the Sound with XMLHttpRequest
     path = "/sounds/"+soundname+".mp3"
     console.log(path);
-	getSound.open("GET", path, true); // Path to Audio File
-	getSound.responseType = "arraybuffer"; // Read as Binary Data
-	getSound.onload = function() {
-		context.decodeAudioData(getSound.response, function(buffer){
-			var soundBuffer = buffer; // Decode the Audio Data and Store it in a Variable
-			soundMapping[clr] = soundBuffer;
-			cool = buffer;
-		});
-	}
-	getSound.send(); // Send the Request and Load the File
+    getSound.open("GET", path, true); // Path to Audio File
+    getSound.responseType = "arraybuffer"; // Read as Binary Data
+    getSound.onload = function() {
+        context.decodeAudioData(getSound.response, function(buffer){
+            var soundBuffer = buffer; // Decode the Audio Data and Store it in a Variable
+            soundMapping[clr] = soundBuffer;
+            cool = buffer;
+        });
+    }
+    getSound.send(); // Send the Request and Load the File
 
 }
 
 function getSound(clr,map) {
-	var playSound = context.createBufferSource(); // Declare a New Sound
-	playSound.buffer = map[clr]; // Attatch our Audio Data as it's Buffer
-	playSound.connect(context.destination);
-	playSound.loop = true;  // Link the Sound to the Output
-	return playSound;	
+    var playSound = context.createBufferSource(); // Declare a New Sound
+    playSound.buffer = map[clr]; // Attatch our Audio Data as it's Buffer
+    playSound.connect(context.destination);
+    playSound.loop = true;  // Link the Sound to the Output
+    return playSound;   
 }
 
 
@@ -194,51 +194,63 @@ function rgbToHex(r, g, b) {
 
 
 Template.instance().togglePlay = function togglePlay(){
-		console.log("playing");
-		play();
-		pause();
+        console.log("playing");
+        play();
+        pause();
 
 }
 
 var currentSounds = {};
 function pause() {
-	Object.keys(currentSounds).forEach(function (clr) {
-		currentSounds[clr].stop();
-	});
-	currentSounds = {};
-	setColumn(0);
+    Object.keys(currentSounds).forEach(function (clr) {
+        currentSounds[clr].stop();
+    });
+    currentSounds = {};
+    setColumn(0);
 }
 
 
 function play(){
-	var speed = 25;
-	var i = 0;
-	var j= 0;
+    var speed = 25;
+    var i = 0;
+    var j= 0;
 
-	while (i<800){ //loop
-		console.log(i);
+    while (i<800){ //loop
+        console.log(i);
 
-		if (j % speed == 0){
-			var clmColors = getColumn();
-			var currentColors = Object.keys(currentSounds);
-			clmColors.forEach(function (clm_clr){ 
-				if (!currentColors.includes(clm_clr)){
-					var soundClr = getSound(clm_clr, soundMapping);
-					currentSounds[clm_clr] = soundClr;
-					currentSounds[clm_clr].start(0);
-				}
-			});
+        if (j % speed == 0){
+            var clmColors = getColumn();
+            var currentColors = Object.keys(currentSounds);
+            clmColors.forEach(function (clm_clr){ 
+                if (!currentColors.includes(clm_clr)){
+                    var soundClr = getSound(clm_clr, soundMapping);
+                    currentSounds[clm_clr] = soundClr;
+                    currentSounds[clm_clr].start(0);
+                }
+            });
 
-			currentColors.forEach(function (curr_clr){
-				if (!clmColors.includes(curr_clr)){
-					currentSounds[curr_clr].stop();
-					delete currentSounds[curr_clr];
-				}
-			});
-			i++;
-		}
-		j++;
-	} //loop
+            currentColors.forEach(function (curr_clr){
+                if (!clmColors.includes(curr_clr)){
+                    currentSounds[curr_clr].stop();
+                    delete currentSounds[curr_clr];
+                }
+            });
+            i++;
+        }
+        j++;
+    } //loop
+}
+
+Template.instance().toggleSave = function toggleSave(){
+        console.log("saving");
+        save();      
+}
+
+function save() {
+
+    var image = canvas.toDataURL("image/png");
+    console.log(image);
+    // save this image (along with other attributes) in a Drawings array/list as custom data under the user ID
 }
 
 
@@ -248,11 +260,13 @@ loadAllSounds();
 
 Template.canvas_template.events({
     'click #play': function(e){ 
-    	Template.instance().togglePlay();
-    
+        Template.instance().togglePlay();
+     },
 
-
+     'click #save': function(e) {
+        Template.instance().toggleSave();
      }
+
 });
 
 
