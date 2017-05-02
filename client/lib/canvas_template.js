@@ -62,6 +62,7 @@ function drawDot(ctx,x,y,size) {
         ctx.closePath();
         ctx.fill();
     } 
+
 function sketchpad_touchStart() {
     // Update the touch co-ordinates
     getTouchPos();

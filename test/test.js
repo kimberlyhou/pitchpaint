@@ -1,6 +1,6 @@
 console.log("cheeses");
 var expect    = require("chai").expect;
-var file_exists = require("../lib/canvas_template.js");
+var file_exists = require("../client/lib/canvas_template.js");
 
 // Ewan's Notes / Test starting point:
 
@@ -27,20 +27,58 @@ describe("Color Converter", function() {
 // 		files (negative values for RGB), one line around the boundary 		
 // 		(or in the corners), two pitches playing at the same time  
 
-// describe("Track extractor", function() {
-// 	it("recognizes emmpty canvas", function() {
+describe("Track extractor", function() {
+	it("recognizes emmpty canvas", function() {
+		var empty = [
+			["000000","000000"],
+			["000000","000000"]
+		];
+		var empty_converted = play(empty)
+		expect(empty_converted).to.equal("ff0000")
+	});
+	it("converts the edges", function() {
+		var edges = [
+			["ff0000", "000000", "ff0000"],
+			["000000", "000000", "000000"],
+			["ff0000", "000000", "ff0000"]
+		];
+		var edges_converted = play(edges)
+		expect(edges_converted).to.equal("ff0000")
 
-// 	});
-// 	it("converts the edges", function() {
+	});
+	it("handles intersecting lines", function() {
+		var intersection = [
+			["000000", "ff0000", "000000"],
+			["00ff00", "ff0000", "00ff00"],
+			["000000", "ff0000", "000000"]
+		];
+		
+		var intersection_converted = play(intersection)
+		expect(intersection_converted).to.equal("ff0000")
 
-// 	});
-// 	it("handles intersecting lines", function() {
-
-// 	});
-// 	it("converts full canvas and line properly", function() {
-
-// 	});
-// });
+	});
+	it("converts full canvas and line properly", function() {
+		var full_canvas = [
+			["ff0000", "ff0000", "ff0000", "ff0000", "ff0000"],
+			["ff0000", "ff0000", "ff0000", "ff0000", "ff0000"],
+			["ff0000", "ff0000", "ff0000", "ff0000", "ff0000"],
+			["ff0000", "ff0000", "ff0000", "ff0000", "ff0000"],
+			["ff0000", "ff0000", "ff0000", "ff0000", "ff0000"]
+		];
+		var line = [
+			["000000", "000000", "000000", "000000", "000000"],
+			["000000", "000000", "000000", "000000", "000000"],
+			["ff0000", "ff0000", "ff0000", "ff0000", "ff0000"],
+			["000000", "000000", "000000", "000000", "000000"],
+			["000000", "000000", "000000", "000000", "000000"]
+		];
+		
+		var line_converted = play(line)
+		var full_canvas_converted = play(full_canvas)
+		expect(line_converted).to.equal("ff0000")
+		expect(full_canvas_converted).to.equal("ff0000")
+	});
+});
 
 // To unit test the renderer (takes "score" and output sounds):
 // 	-Test cases:
